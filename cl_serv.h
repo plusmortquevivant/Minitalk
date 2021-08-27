@@ -9,5 +9,10 @@
 # define RESET   "\x1b[0m"
 
 # include <unistd.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <signal.h>
+
+int	ft_atoi(const char *str);
 
 #endif
