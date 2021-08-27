@@ -26,3 +26,47 @@ int	ft_atoi(const char *str)
 	}
 	return (sign * (int)r);
 }
+
+void	ft_putstr_fd(char *color, char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(1, color, 5);
+	while (*s)
+	{
+		write(fd, &*s, 1);
+		s++;
+	}
+	write(1, RESET, 5);
+}
+
+void	ft_putchar_fd(char *color, char c, int fd)
+{
+	write(1, color, 5);
+	write(fd, &c, 1);
+	write(1, RESET, 5);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		ft_putchar_fd(GREEN, '-', fd);
+		ft_putchar_fd(GREEN, '2', fd);
+		ft_putnbr_fd(147483648, fd);
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd(GREEN, '-', fd);
+		ft_putnbr_fd(n * (-1), fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+	{
+		ft_putchar_fd(GREEN, n + '0', fd);
+	}
+}

@@ -18,7 +18,7 @@ static int	ft_isnum(char *argv)
 	return (1);
 }
 
-void ft_bit_parser(pid_t PID, char *str)
+static void ft_bit_parser(pid_t PID, char *str)
 {
     int bits;
 	int i;
@@ -27,11 +27,27 @@ void ft_bit_parser(pid_t PID, char *str)
 	i = 0;
 	while (*(str + i))
 	{
-		bits = 8;
+		bits = 7;
     	while (bits >= 0)
     	{
         	bit = (unsigned int)(*(str + i) >> bits) & 1;
-        	//KILL(PID, SIGUSR1);
+        	if ((bit & 1) == 0)
+				{
+					 (kill(PID, SIGUSR1));
+						// {
+						// 	write(1, RED "WffRONG PID INPUT\n" RESET, 26);
+						// 	return ;
+						 //}
+				}
+        	else if ((bit & 1) == 1)
+				{
+					 (kill(PID, SIGUSR2));
+				// 		{
+				// 			write(1, RED "WRONG PID INPUT\n" RESET, 26);
+				// 			return ;
+				// 		}
+				 }
+			printf("%d", bit);
 			bits--;
     	}
 		i++;
@@ -73,10 +89,8 @@ void ft_bit_parser(pid_t PID, char *str)
 
 int		main(int argc, char **argv)
 {
-	int		cnt;
 	pid_t PID;
 
-	cnt = 0;
 	if (argc != 3)
 		write(1, RED "WRONG INPUT\n" RESET, 22);
 	else
