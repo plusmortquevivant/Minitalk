@@ -49,43 +49,11 @@ static void ft_bit_parser(pid_t PID, char *str)
 				 }
 			printf("%d", bit);
 			bits--;
+			usleep(30);
     	}
 		i++;
 	}
 }
-
-// static int ft_1bit(char c, int i)
-// {
-// 	int	res;
-
-// 	if ((c & (1 << i)) == 0)
-// 			res = 0;
-// 		else
-// 			res = 1;
-// 	printf("%d\t", res);
-// 	return (res);
-// }
-
-// int	ft_char2bit(char *str)
-// {
-// 	int i;
-// 	int	res;
-// 	int	temp;
-// 	int	aux = 8;
-
-// 	res = 0;
-// 	i = 0;
-// 	while (i < 8)
-// 	{	
-// 		temp = ft_1bit(str[i], i);
-// 		// res = res & 1 + (temp << --aux);
-// 		//aux--;
-// 		i++;
-// 	}
-// 	printf("\n");
-// 	printf("%d\t", res);
-// 	return (res);
-// }
 
 int		main(int argc, char **argv)
 {
@@ -103,6 +71,7 @@ int		main(int argc, char **argv)
 		else
 		{
 			PID = ft_atoi(argv[1]);
+			printf("%d\n", PID);
 			ft_bit_parser(PID, argv[2]);
 			//ft_char2bit(argv[2]);
 			//printf("llaaaaaa\n");
